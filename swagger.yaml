@@ -1,0 +1,98 @@
+# swagger: "2.0"
+# info: 
+#   title: "learning swagger"
+#   version: "1.0.0"
+# basePath : "/"
+# paths :
+  # /example:
+ 
+
+#  @swagger
+ /api/v1/user:
+   post:
+     summary: Creates a new user.
+     consumes:
+         - application/json
+     parameters:
+         - in: body
+           name: user
+           description: The user to create.
+           schema:
+               $ref: '#/definitions/User'     # <----------
+     responses:
+           200:
+           description: OK
+     definitions:
+          User:           # <----------
+              type: object
+              required: true
+              properties:
+              name:
+                  type: string
+              email:
+                  type: string
+              password:
+                  type: string
+              address:
+                  type: string
+              identity_type:
+                  type: string
+              identity_number:
+                  type : string
+
+  Post(
+     path="/login",
+     tags={"Login User"},
+     summary="Returns a Sample API response",
+     description="Login User",
+     operationId="login",
+     Parameter(
+          name="email",
+          description="email_user",
+          required=true,
+          in="query",
+          Schema(
+              type="string"
+          )
+     ),
+     Parameter(
+          name="password",
+          description="password_user",
+          required=true,
+          in="query",
+          Schema(
+              type="string"
+          )
+     ),
+     Response(
+         response="200",
+         description="ok",
+         content={
+             MediaType(
+                 mediaType="application/json",
+                 Schema(
+                     Property(
+                         property="code",
+                         type="integer",
+                         description="Status code"
+                     ),
+                     Property(
+                         property="status",
+                         type="string",
+                         description="status"
+                     ),
+                     Property(
+                         property="message",
+                         type="string",
+                         description="Messages",
+                     ),
+                     example={
+                         "code": 200,
+                         "status": "success",
+                         "message": "Login sukses"
+                     }
+                 )
+             )
+         }
+     )
+ ) 
